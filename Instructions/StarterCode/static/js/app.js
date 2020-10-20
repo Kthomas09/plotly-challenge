@@ -7,16 +7,20 @@ function buildPlot(id){
     var metadata = data.metadata;
     var names = data.names;
     var samples = data.samples;
-
+    
+    // Setting the intial display message into drop down menu
     var message = ("Choose A Sample");
     d3.select("#selDataset")
       .append("option")
       .attr("value",message)
       .html(message)
-
+    
+    
     var dropMenu = d3.select("#selDataset");
     names.forEach((sample)=>{
-        console.log(sample)
+        var row = dropMenu.append("option")
+                          .attr("value", sample);
+        row.text(sample);
     })
 
     
