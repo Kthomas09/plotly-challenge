@@ -1,5 +1,5 @@
 // function to build the necessary plots for the dashboard
-function buildPlot(id){
+// function buildPlot(id){
     // reading the sample.json into the JavaScript
     d3.json("samples.json").then((data) =>{
     
@@ -15,16 +15,43 @@ function buildPlot(id){
       .attr("value",message)
       .html(message)
     
-    
+    // populating the dropdown menu with the sample names
     var dropMenu = d3.select("#selDataset");
     names.forEach((sample)=>{
         var row = dropMenu.append("option")
                           .attr("value", sample);
         row.text(sample);
-    })
+    });
+    // function to change the drop down menu and append selected sample data.
+    const dropMenuChange = () => {
+        var demographTable = d3.select("#demographic-table");
+        demographTable.html("");
+        var inputElement = d3.select("#selDataset");
+        var tableBody = d3.select("tbody");
+        var inputValue = d3.select("value");
+
+        var filterMetadata = metadata.filter(d => d.id == inputValue);
+        var filterSamples = samples.filter(s => s.id == inputValue);
+
+        filterMetadata.forEach((sample)=>{
+            let row = tableBody.append("tr");
+            Object.entries(sample).forEach(value =>{
+                let cell = row.append("tr");
+                cell.text("");
+                cell.text(`${value[0]}: ${value[1]}`);
+            })
+        });
+    }
+    
+    var slicedSamples = filterSamples[0].sample_values.slice(0,10).reverse();
+    var slicedOTU_ids = filterSamples[0].otu_ids.slice(0,10).reverse().map(d => `OTU `+ d);
+    var slicedOTU_labels = filterSamples[0].otu_labels.slice(0,10).reverse();
+    console.log(slicedSamples)
+    console.log(slicedOTU_ids)
+    console.log(slicedOTU_labels)
 
     
     });
-};
+// };
 
-buildPlot(0)
+// buildPlot(0)
