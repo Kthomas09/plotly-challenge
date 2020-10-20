@@ -14,6 +14,11 @@ function buildPlot(id){
       .attr("value",message)
       .html(message)
 
+    var dropMenu = d3.select("#selDataset");
+    names.forEach((sample)=>{
+        console.log(sample)
+    })
+
     
     });
 };
