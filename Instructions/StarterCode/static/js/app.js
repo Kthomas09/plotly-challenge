@@ -1,5 +1,5 @@
 // function to build the necessary plots for the dashboard
-// function buildPlot(id){
+function buildPlot(id){
     // reading the sample.json into the JavaScript
     d3.json("samples.json").then((data) =>{
     
@@ -33,25 +33,45 @@
         var filterMetadata = metadata.filter(d => d.id == inputValue);
         var filterSamples = samples.filter(s => s.id == inputValue);
 
-        filterMetadata.forEach((sample)=>{
-            let row = tableBody.append("tr");
-            Object.entries(sample).forEach(value =>{
-                let cell = row.append("tr");
-                cell.text("");
-                cell.text(`${value[0]}: ${value[1]}`);
-            })
-        });
-    }
+        console.log(filterSamples)
+        console.log(filterMetadata)
+
+        // filterMetadata.forEach((sample)=>{
+        //     let row = tableBody.append("tr");
+        //     Object.entries(sample).forEach(value =>{
+        //         let cell = row.append("tr");
+        //         cell.text("");
+        //         cell.text(`${value[0]}: ${value[1]}`);
+        //         var slicedSamples = filterSamples[0].sample_values.slice(0,10).reverse();
+        //         var slicedOTU_ids = filterSamples[0].otu_ids.slice(0,10).reverse().map(d => `OTU `+ d);
+        //         var slicedOTU_labels = filterSamples[0].otu_labels.slice(0,10).reverse();
+        //         console.log(slicedSamples)
+        //         console.log(slicedOTU_ids)
+        //         console.log(slicedOTU_labels)
+            
+        //         var trace1 = {
+        //             x: slicedSamples,
+        //             y: slicedOTU_ids,
+        //             text: slicedOTU_labels,
+        //             type: "bar",
+        //             orientation: "h"
+        //         };
+            
+        //         var barGraphData = [trace1]
+                
+        //         var barGraphLayout = {
+        //             title: "Top Ten Belly Button OTU Samples",
+        //             xaxis: {title:"Ubiquity of OTU Samples"},
+        //             yaxis: {title:"OTU ID Number"}
+        //         };
+        //         Plotly.newPlot("bar", barGraphData, barGraphLayout)
+        //     })
+        // });
+    };
     
-    var slicedSamples = filterSamples[0].sample_values.slice(0,10).reverse();
-    var slicedOTU_ids = filterSamples[0].otu_ids.slice(0,10).reverse().map(d => `OTU `+ d);
-    var slicedOTU_labels = filterSamples[0].otu_labels.slice(0,10).reverse();
-    console.log(slicedSamples)
-    console.log(slicedOTU_ids)
-    console.log(slicedOTU_labels)
 
     
     });
-// };
+};
 
-// buildPlot(0)
+buildPlot(0)
