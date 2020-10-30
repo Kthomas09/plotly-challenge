@@ -2,14 +2,13 @@
 function buildData(sample) {
     // reading the sample.json into the JavaScript
     d3.json("samples.json").then((data) => {
-        
+        // console.log(data)
         // Setting the variables to read in the specific portions of the JSON
         var metadata = data.metadata;
         var names = data.names;
         var samples = data.samples;
         
         // Setting the intial display message into drop down menu
-    
         var message = ("Choose A Sample");
         d3.select("#selDataset")
         .append("option")
@@ -25,16 +24,20 @@ function buildData(sample) {
         });
     });
 };
-
-// build chart function
-function buildCharts(metadata){
+function buildCharts(buildData){
     // slice data
+    var filterMetadata = metadata.filter(d => d.id == metadata);
+    console.log(filterMetadata)
+    var filterSamples = samples.filter(s => s.id == sample);
+    // console.log(filterSamples)
     // layout the chart
     // put trace in 
     // layout trace
     // plot trace
 
 };
+
+// build chart function
 
 // Initiate the entire function
 function init(){
@@ -49,6 +52,7 @@ function init(){
         
         var first = name[0]
         buildData(first);
+        buildCharts(first)
         // call build chart function with first
     })
 
@@ -73,8 +77,8 @@ init();
         //     var tableBody = d3.select("tbody");
         //     var inputValue = d3.select("value");
 
-        //     var filterMetadata = metadata.filter(d => d.id == sample);
-        //     var filterSamples = samples.filter(s => s.id == sample);
+        //    
+        //     
 
 
 
