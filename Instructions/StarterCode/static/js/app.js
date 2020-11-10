@@ -5,6 +5,8 @@ function buildPlot(sample){
         // console.log(otu_ids)
         var sample_values = data.samples[0].sample_values.slice(0,10).reverse();
         // console.log(sample_values)
+        var otu_labels = data.samples[0].otu_labels.slice(0,10).reverse();
+        // console.log(otu_labels)
     })
 };
 
