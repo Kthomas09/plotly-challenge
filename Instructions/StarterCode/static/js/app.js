@@ -61,12 +61,18 @@ function buildPlot(sample){
 function gatheringDemographicInfo(id) {
     d3.json("samples.json").then((data)=>{
         var metadata = data.metadata;
-        console.log(metadata)
-    })
+        // console.log(metadata)
+        var info = metadata.filter(m => m.id.toString()==id)[0];
+        var demoInfo = d3.select("#sample-metadata");
+        demoInfo.html("");
+        Object.entries(info).forEach((key)=>{
+            demoInfo.append("h5").text(key[0].toUpperCase()+": "+key[1]+"\n");
+        });
+    });
 }
 
-buildPlot();
-gatheringDemographicInfo();
+buildPlot(data.name[0]);
+gatheringDemographicInfo(data.name[0]);
 
 
 
