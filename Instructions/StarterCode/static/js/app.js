@@ -1,6 +1,8 @@
 function buildPlot(sample){
     d3.json("samples.json").then((data)=>{
-        console.log(data)
+        // console.log(data)
+        var otu_ids = data.samples[0].otu_ids;
+        console.log(otu_ids)
     })
 };
 
