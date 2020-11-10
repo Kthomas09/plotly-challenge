@@ -32,8 +32,9 @@ function buildPlot(sample){
                 b:30
             }
         };
-        // plot the bar graph
+    // plot the bar graph
     Plotly.newPlot("bar", data_1, layout_1);
+        // variable to plot the trace of the bubble chart
         var trace_2 = {
             x: data.samples[0].otu_ids,
             y: data.samples[0].sample_values,
@@ -44,17 +45,28 @@ function buildPlot(sample){
             },
             text: data.samples[0].otu_labels,
         };
+        // variable to create the data
+        var data_2 = [trace_2];
+        // varable to plot the layout of the bar graph
         var layout_2 = {
             xaxis: {title: "OTU ID"},
             height: 600,
             width: 1000
         };
-        var data_2 = [trace_2];
+    // plot the bubble chart
     Plotly.newPlot("bubble", data_2,layout_2);
     })
 };
 
+function gatheringDemographicInfo(id) {
+    d3.json("samples.json").then((data)=>{
+        var metadata = data.metadata;
+        console.log(metadata)
+    })
+}
+
 buildPlot();
+gatheringDemographicInfo();
 
 
 
