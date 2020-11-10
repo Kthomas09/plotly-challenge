@@ -7,6 +7,9 @@ function buildPlot(sample){
         // console.log(sample_values)
         var otu_labels = data.samples[0].otu_labels.slice(0,10).reverse();
         // console.log(otu_labels)
+        var top_otu_samples = (data.samples[0].otu_ids.slice(0,10)).reverse();
+        var top_otu_ids = top_otu_samples.map(d => "OTU " + d);
+        console.log(`otu ids: ${top_otu_ids}`);
     })
 };
 
