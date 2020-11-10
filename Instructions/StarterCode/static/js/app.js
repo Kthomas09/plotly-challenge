@@ -1,15 +1,56 @@
 function buildPlot(sample){
     d3.json("samples.json").then((data)=>{
-        // console.log(data)
         var otu_ids = data.samples[0].otu_ids;
-        // console.log(otu_ids)
         var sample_values = data.samples[0].sample_values.slice(0,10).reverse();
-        // console.log(sample_values)
         var otu_labels = data.samples[0].otu_labels.slice(0,10).reverse();
-        // console.log(otu_labels)
+        // formatting data for plots
         var top_otu_samples = (data.samples[0].otu_ids.slice(0,10)).reverse();
         var top_otu_ids = top_otu_samples.map(d => "OTU " + d);
-        console.log(`otu ids: ${top_otu_ids}`);
+        var top_otu_labels = data.samples[0].otu_labels.slice(0,10).reverse();
+        // variable to plot the trace of the bar graph
+        var trace_1 = {
+            x: sample_values,
+            y: otu_ids,
+            text: top_otu_labels,
+            marker: {
+            color: "red"},
+            type: "bar",
+            orientation: "h", 
+        };
+        // variable to create the data
+        var data_1 = [trace_1];
+        // varable to plot the layout of the bar graph
+        var layout_1 = {
+            title: "Top Ten Operational Taxonomic Units",
+            yaxis:{
+                tickmode: "Linear",
+            },
+            margin: {
+                l:100,
+                r:100,
+                t:100,
+                b:30
+            }
+        };
+        // plot the bar graph
+    Plotly.newPlot("bar", data_1, layout_1);
+        var trace_2 = {
+            x: data.samples[0].otu_ids,
+            y: data.samples[0].sample_values,
+            mode: "markers",
+            markers: {
+                size: data.samples[0].sample_values,
+                color: data.samples[0].otu_ids,
+            },
+            text: data.samples[0].otu_labels,
+        };
+        var layout_2 = {
+            xaxis: {title: "OTU ID"},
+            height: 600,
+            width: 1000
+        };
+        var data_2 = [trace_2];
+    Plotly.newPlot("bubble", data_2,layout_2);
     })
 };
 
