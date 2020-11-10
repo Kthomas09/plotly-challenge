@@ -1,62 +1,75 @@
-// function to build the necessary plots for the dashboard
-function buildData(sample) {
-    // reading the sample.json into the JavaScript
-    d3.json("samples.json").then((data) => {
-        // console.log(data)
-        // Setting the variables to read in the specific portions of the JSON
-        var metadata = data.metadata;
-        var names = data.names;
-        var samples = data.samples;
-        
-        // Setting the intial display message into drop down menu
-        var message = ("Choose A Sample");
-        d3.select("#selDataset")
-        .append("option")
-        .attr("value", message)
-            .html(message)
-
-        // populating the dropdown menu with the sample names
-        var dropMenu = d3.select("#selDataset");
-        names.forEach((sample) => {
-            var row = dropMenu.append("option")
-                .attr("value", sample);
-            row.text(sample);
-        });
-    });
-};
-function buildCharts(buildData){
-    // slice data
-    var filterMetadata = metadata.filter(d => d.id == metadata);
-    console.log(filterMetadata)
-    var filterSamples = samples.filter(s => s.id == sample);
-    // console.log(filterSamples)
-    // layout the chart
-    // put trace in 
-    // layout trace
-    // plot trace
-
-};
-
-// build chart function
-
-// Initiate the entire function
-function init(){
-    var selector = d3.select("#selDataset");
-        d3.json("samples.json").then((data)=>{
-            var name = data.names;
-            name.forEach((sample)=>{
-                selector.append("option")
-                .property("value", sample)
-                .text(sample);
-            });
-        
-        var first = name[0]
-        buildData(first);
-        buildCharts(first)
-        // call build chart function with first
+function buildPlot(sample){
+    d3.json("samples.json").then((data)=>{
+        console.log(data)
     })
+};
 
-}
+buildPlot();
+
+
+
+
+
+
+// // function to build the necessary plots for the dashboard
+// function buildData(sample) {
+//     // reading the sample.json into the JavaScript
+//     d3.json("samples.json").then((data) => {
+//         // console.log(data)
+//         // Setting the variables to read in the specific portions of the JSON
+//         var metadata = data.metadata;
+//         var names = data.names;
+//         var samples = data.samples;
+        
+//         // Setting the intial display message into drop down menu
+//         var message = ("Choose A Sample");
+//         d3.select("#selDataset")
+//         .append("option")
+//         .attr("value", message)
+//             .html(message)
+
+//         // populating the dropdown menu with the sample names
+//         var dropMenu = d3.select("#selDataset");
+//         names.forEach((sample) => {
+//             var row = dropMenu.append("option")
+//                 .attr("value", sample);
+//             row.text(sample);
+//         });
+//     });
+// };
+// function buildCharts(buildData){
+//     // slice data
+//     var filterMetadata = metadata.filter(d => d.id == metadata);
+//     console.log(filterMetadata)
+//     var filterSamples = samples.filter(s => s.id == sample);
+//     // console.log(filterSamples)
+//     // layout the chart
+//     // put trace in 
+//     // layout trace
+//     // plot trace
+
+// };
+
+// // build chart function
+
+// // Initiate the entire function
+// function init(){
+//     var selector = d3.select("#selDataset");
+//         d3.json("samples.json").then((data)=>{
+//             var name = data.names;
+//             name.forEach((sample)=>{
+//                 selector.append("option")
+//                 .property("value", sample)
+//                 .text(sample);
+//             });
+        
+//         var first = name[0]
+//         buildData(first);
+//         buildCharts(first)
+//         // call build chart function with first
+//     })
+
+// }
 
 
 // function menuChange(newsample)
@@ -64,7 +77,7 @@ function init(){
     // metadata changed, call function (below)
     // buildData(newsample)
     // buildChart(newsample)
-init();
+// init();
 
 // 
         // function to change the drop down menu and append selected sample data.
